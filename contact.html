@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Desk | Comtech Suppliers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #F8FAFC; color: #0F172A; }
+    </style>
+</head>
+<body class="pt-24 selection:bg-emerald-600 selection:text-white">
+
+    <!-- Header Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="assets/images/logo1.png" alt="Comtech Logo" class="h-10 w-auto rounded-lg border border-slate-100">
+                <span class="text-slate-900 font-extrabold text-lg uppercase tracking-tight hidden md:inline">Comtech <span class="text-emerald-600">Suppliers</span></span>
+            </a>
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="text-xs uppercase tracking-widest font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Home </a>
+                <a href="stock.html" class="text-xs uppercase tracking-widest font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Stock</a>
+                <a href="contact.html" class="text-xs uppercase tracking-widest font-bold text-emerald-600">Contact</a>
+            </div>
+            <a href="contact.html" class="bg-slate-900 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider">Request RFP</a>
+        </div>
+    </nav>
+
+    <!-- Main Contact Setup -->
+    <section class="py-16 px-6 max-w-5xl mx-auto">
+        <div class="bg-white rounded-3xl border border-slate-200/60 p-8 md:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 space-y-6">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] text-emerald-600 font-bold block mb-2">Corporate Account Desk</span>
+                    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Initiate Inquiry</h1>
+                </div>
+                <p class="text-slate-500 text-sm leading-relaxed">Connect with our administrative accounts desks to map out specialized volume requirements, national commercial bids, or regional delivery protocols.</p>
+                
+                <div class="space-y-4 pt-4 text-xs font-medium text-slate-700 border-t border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <span class="text-slate-400 w-16">Email:</span>
+                        <a href="mailto:info@comtech-suppliers.com" class="text-emerald-600 hover:underline">jacksonnsongadevlog@gmail.com</a>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-slate-400 w-16">Hotline:</span>
+                        <a href="https://api.whatsapp.com/send?phone=26077949504" class="text-slate-900 hover:text-emerald-600 transition-colors">+260 779 495 04</a>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="text-slate-400 w-16">Main Hub:</span>
+                        <span class="text-slate-900">town center, Lusaka, Zambia.</span>
+                    </div>
+                </div>
+
+                <!-- Regional Network Summary -->
+                <div class="bg-slate-50 border border-slate-200/60 rounded-2xl p-5 text-xs space-y-2">
+                    <h4 class="font-bold text-slate-900 uppercase tracking-wider text-[10px] text-emerald-700">Western Province Sub-Depots</h4>
+                    <p class="text-slate-500 leading-relaxed font-light">Servicing key institutional operational endpoints directly via decentralized facilities located in **Senanga, Mongu, and Kaoma**.</p>
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="lg:col-span-7">
+                <form action="https://formspree.io/f/xvzlzlok" method="POST" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1.5">Corporate Entity</label>
+                            <input type="text" name="name" placeholder="Company Name Ltd" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:border-emerald-500 focus:bg-white outline-none text-xs text-slate-900 transition-all">
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1.5">Official Email</label>
+                            <input type="email" name="email" placeholder="procurement@entity.com" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:border-emerald-500 focus:bg-white outline-none text-xs text-slate-900 transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase tracking-wider text-slate-400 font-bold block mb-1.5">Procurement Asset Specifications</label>
+                        <textarea name="message" placeholder="Please provide specific information regarding device configurations, bulk stationery quantities required, and your target operational delivery hub (Lusaka, Senanga, Mongu, Kaoma)..." required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 focus:border-emerald-500 focus:bg-white outline-none h-44 text-xs text-slate-900 resize-none transition-all"></textarea>
+                    </div>
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white w-full py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest transition-all shadow-md shadow-emerald-600/10 active:scale-[0.99]">
+                        Transmit Formal Request For Proposal
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Global Footer Component -->
+    <footer class="pt-16 pb-8 px-6 bg-slate-900 text-slate-400 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 border-b border-slate-800 pb-12">
+            <div>
+                <span class="text-white font-black text-lg tracking-tight uppercase block mb-3">COMTECH <span class="text-emerald-500">SUPPLIERS</span></span>
+                <p class="text-xs text-slate-400 max-w-xs font-light">Premium workspace optimization pipelines running throughout Zambia's core financial sectors.</p>
+            </div>
+            <div class="text-xs space-y-1">
+                <h4 class="font-bold text-white uppercase tracking-wider mb-2">Fulfillment Matrix</h4>
+                <p>Main Hub: Town Center, Lusaka, Zambia.</p>
+                <p>Regional Points: Senanga, Mongu, and Kaoma.</p>
+            </div>
+        </div>
+        <div class="pt-6 text-center text-[11px] text-slate-500 font-medium">&copy; 2026 Comtech Suppliers. All Rights Reserved.</div>
+    </footer>
+
+</body>
+</html>

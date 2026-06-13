@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Stock Console | Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Outfit', sans-serif; }</style>
+    
+    <script>
+        (function() {
+            const activeToken = sessionStorage.getItem('comtech_session_token');
+            if (activeToken !== 'AUTH_TOKEN_SECURE_VALID_2026') {
+                window.location.replace("index.html");
+            }
+        })();
+    </script>
+</head>
+<body class="p-8 bg-slate-50">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+        <div class="flex justify-between items-center bg-slate-900 text-white p-6 rounded-2xl shadow-lg">
+            <div>
+                <h1 class="text-xl font-bold tracking-tight">Comtech Inventory Management Console</h1>
+                <p class="text-slate-400 text-xs">Direct update control pipeline to live stock ledger</p>
+            </div>
+            <div class="flex gap-3">
+                <a href="stock.html" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all flex items-center">
+                    View Live Catalog ↗
+                </a>
+                <button onclick="handleLogout()" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all">
+                    Secure Log Out
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2 mb-4">Provision New Core Asset</h3>
+            <form id="add-stock-form" onsubmit="handleFormSubmit(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                <div class="md:col-span-4">
+                    <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Asset Name</label>
+                    <input type="text" id="form-name" required placeholder="e.g., Enterprise Multi-function Printer" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Catalog SKU</label>
+                    <input type="text" id="form-sku" required placeholder="e.g., SKU-PR-MFP90" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-mono outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Quantity Available</label>
+                    <input type="text" id="form-volume" required placeholder="e.g., 14 Units" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Stock Status</label>
+                    <select id="form-status" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                        <option value="In Stock &bull; Ready">In Stock</option>
+                        <option value="Low Stock &bull; Secure">Low Stock</option>
+                        <option value="Out of Stock">Out of Stock</option>
+                    </select>
+                </div>
+                <div class="md:col-span-7">
+                    <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Description Details</label>
+                    <input type="text" id="form-desc" required placeholder="Provide brief specification details..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                </div>
+                <div class="md:col-span-3">
+                    <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Product Image</label>
+                    <input type="file" id="form-image" accept="image/*" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs outline-none file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-200 file:text-slate-700 hover:file:bg-slate-300">
+                </div>
+                <div class="md:col-span-2 flex items-end">
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-md">
+                        Commit Asset
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2 mb-4">Active Stock Ledger Control</h3>
+            <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-600 font-bold">
+                            <th class="p-4">Thumbnail</th>
+                            <th class="p-4">SKU / Identifier</th>
+                            <th class="p-4">Core Item Identity</th>
+                            <th class="p-4">Volume Tracking</th>
+                            <th class="p-4 text-right">Operational Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getStockManifest() {
+            const currentData = localStorage.getItem('comtech_inventory_manifest');
+            return currentData ? JSON.parse(currentData) : [];
+        }
+
+        function saveStockManifest(updatedArray) {
+            localStorage.setItem('comtech_inventory_manifest', JSON.stringify(updatedArray));
+            renderAdminTable();
+        }
+
+        function renderAdminTable() {
+            const manifest = getStockManifest();
+            const adminTable = document.getElementById('admin-table-body');
+            if (!adminTable) return;
+            adminTable.innerHTML = '';
+
+            manifest.forEach(item => {
+                const imgTag = item.image ? `<img src="${item.image}" class="h-10 w-10 object-cover rounded-lg border border-slate-200">` : `<div class="h-10 w-10 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-400">No Img</div>`;
+                
+                adminTable.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="p-4">${imgTag}</td>
+                        <td class="p-4 font-mono font-bold text-slate-400">${item.sku}</td>
+                        <td class="p-4 font-semibold text-slate-900">${item.name}</td>
+                        <td class="p-4 text-slate-600 font-medium">${item.volume}</td>
+                        <td class="p-4 text-right">
+                            <button onclick="purgeAsset(${item.id})" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wide">
+                                Purge Asset
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const manifest = getStockManifest();
+            const imageFile = document.getElementById('form-image').files[0];
+
+            if (imageFile) {
+                const reader = new FileReader();
+                // Convert chosen file to Base64 Text String
+                reader.onloadend = function() {
+                    const newItem = {
+                        id: Date.now(), 
+                        name: document.getElementById('form-name').value,
+                        sku: document.getElementById('form-sku').value,
+                        volume: document.getElementById('form-volume').value,
+                        status: document.getElementById('form-status').value,
+                        desc: document.getElementById('form-desc').value,
+                        image: reader.result // Base64 string data saved here
+                    };
+                    manifest.push(newItem);
+                    saveStockManifest(manifest);
+                    document.getElementById('add-stock-form').reset();
+                }
+                reader.readAsDataURL(imageFile);
+            }
+        }
+
+        function purgeAsset(id) {
+            if(confirm("Confirm asset removal?")) {
+                const manifest = getStockManifest();
+                const filteredManifest = manifest.filter(p => p.id !== id);
+                saveStockManifest(filteredManifest);
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('comtech_session_token');
+            window.location.replace("index.html");
+        }
+
+        document.addEventListener('DOMContentLoaded', renderAdminTable);
+    </script>
+</body>
+</html>
