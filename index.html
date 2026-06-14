@@ -1,226 +1,498 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Comtech Suppliers | Premium Corporate Workspace Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #F8FAFC; color: #0F172A; }
-        html, body { scrollbar-width: none; -ms-overflow-style: none; }
-        html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
-        @media (min-width: 1024px) {
-            .hover-premium:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
-                border-color: rgba(5, 150, 105, 0.2);
-            }
+      body {
+        font-family: "Outfit", sans-serif;
+        background-color: #020617;
+        color: #f1f5f9;
+      }
+      html,
+      body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      @media (min-width: 1024px) {
+        .hover-premium:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+          border-color: rgba(16, 185, 129, 0.3);
         }
+      }
     </style>
-</head>
-<body class="selection:bg-emerald-600 selection:text-white">
-
+  </head>
+  <body class="selection:bg-emerald-600 selection:text-white bg-slate-950">
     <!-- Global Corporate Header -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+    <nav
+      class="fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4"
+      >
         <a href="index.html" class="flex items-center gap-3 group">
-            <img src="assets/images/logo1.png" alt="Comtech Logo" class="h-14 w-auto rounded-none transition-transform group-hover:scale-105">
-            <div class="hidden md:flex flex-col justify-center">
-                <span class="text-slate-900 font-extrabold text-lg uppercase tracking-tight">Comtech <span class="text-emerald-600">Suppliers</span></span>
-                <span class="text-[9px] tracking-[0.3em] text-slate-400 uppercase font-semibold">Workspace Infrastructure</span>
-            </div>
+          <img
+            src="assets/images/logo1.png"
+            alt="Comtech Logo"
+            class="h-14 w-auto rounded-none transition-transform group-hover:scale-105 filter brightness-110"
+          />
+          <div class="hidden md:flex flex-col justify-center">
+            <span
+              class="text-white font-extrabold text-lg uppercase tracking-tight"
+              >Comtech <span class="text-emerald-400">Suppliers</span></span
+            >
+            <span
+              class="text-[9px] tracking-[0.3em] text-slate-500 uppercase font-semibold"
+              >Workspace Infrastructure</span
+            >
+          </div>
         </a>
-        
+
         <div class="flex items-center space-x-6 md:space-x-8">
-            <a href="index.html" class="text-xs uppercase tracking-widest font-bold text-emerald-600">Home</a>
-            <a href="stock.html" class="text-xs uppercase tracking-widest font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Stock</a>
-            <a href="contact.html" class="text-xs uppercase tracking-widest font-semibold text-slate-600 hover:text-emerald-600 transition-colors">Contact</a>
-            
-            <span class="h-4 w-px bg-slate-200 hidden sm:block"></span>
-            
-            <a href="login.html" class="text-[11px] uppercase tracking-widest font-medium text-slate-400 hover:text-slate-900 transition-colors flex items-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-                Portal
-            </a>
-        </div>
-        
-        <a href="contact.html" class="hidden sm:inline-flex bg-slate-900 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full font-medium transition-all text-xs uppercase tracking-wider shadow-sm">Request RFP</a>
-    </div>
-</nav>
+          <a
+            href="index.html"
+            class="text-xs uppercase tracking-widest font-bold text-emerald-400"
+            >Home</a
+          >
+          <a
+            href="stock.html"
+            class="text-xs uppercase tracking-widest font-semibold text-slate-400 hover:text-emerald-400 transition-colors"
+            >Stock</a
+          >
+          <a
+            href="contact.html"
+            class="text-xs uppercase tracking-widest font-semibold text-slate-400 hover:text-emerald-400 transition-colors"
+            >Contact</a
+          >
 
-    <!-- Luxury Showcase Hero -->
-    <section class="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-6 pt-32 bg-gradient-to-b from-slate-50 via-white to-slate-100/50 overflow-hidden">
-        <div class="absolute top-1/4 left-10 w-72 h-72 bg-emerald-100/40 rounded-full blur-[120px] -z-10"></div>
-        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-blue-100/30 rounded-full blur-[140px] -z-10"></div>
+          <span class="h-4 w-px bg-slate-800 hidden sm:block"></span>
 
-        <div class="w-full max-w-4xl relative z-10">
-            <div class="inline-block px-4 py-1.5 bg-emerald-50 border border-emerald-200/60 rounded-full mb-6">
-                <span class="text-[10px] uppercase tracking-[0.25em] text-emerald-700 font-bold">COMTECH SUPPLIERS</span>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.15]">
-                Complete Printing Tech & <br><span class="bg-gradient-to-r from-emerald-600 to-slate-800 bg-clip-text text-transparent">Corporate Stationery Pools.</span>
-            </h1>
-            <p class="max-w-xl mx-auto text-slate-500 text-sm md:text-base mb-10 font-normal leading-relaxed">
-                Empowering administrative architecture across Zambia with direct manufacturer pipelines, modern distribution systems, and total logistical integrity.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="stock.html" class="px-8 bg-emerald-600 text-white py-4 rounded-xl font-semibold uppercase text-[11px] tracking-wider hover:bg-emerald-700 shadow-md shadow-emerald-600/10 transition-all text-center">Explore Available Inventory</a>
-                <a href="contact.html" class="px-8 bg-white border border-slate-200 text-slate-700 py-4 rounded-xl font-semibold uppercase text-[11px] tracking-wider hover:bg-slate-50 transition-all text-center">Establish Account Connection</a>
-            </div>
+          <a
+            href="login.html"
+            class="text-[11px] uppercase tracking-widest font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1.5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke="currentColor"
+              class="w-3.5 h-3.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+              />
+            </svg>
+            Portal
+          </a>
         </div>
+
+        <a
+          href="contact.html"
+          class="hidden sm:inline-flex bg-white text-slate-950 hover:bg-emerald-500 hover:text-slate-950 px-5 py-2.5 rounded-full font-bold transition-all text-xs uppercase tracking-wider shadow-sm"
+          >Request RFP</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero Showcase Section -->
+    <section
+      class="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-6 pt-32 bg-slate-950 overflow-hidden"
+    >
+      <div class="absolute inset-0 z-0">
+        <img
+          src="assets/images/image3.jpg"
+          alt="Comtech Warehouse Hub"
+          class="w-full h-full object-cover object-center opacity-20 filter contrast-125 brightness-75"
+        />
+      </div>
+
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent z-10"
+      ></div>
+
+      <div class="w-full max-w-4xl relative z-20">
+        <div
+          class="inline-block px-4 py-1.5 bg-emerald-950/60 border border-emerald-800/50 rounded-full mb-6"
+        >
+          <span
+            class="text-[10px] uppercase tracking-[0.25em] text-emerald-400 font-bold"
+            >COMTECH SUPPLIERS</span
+          >
+        </div>
+        <h1
+          class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-[1.15]"
+        >
+          Complete Printing Tech & <br /><span
+            class="bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent"
+            >Corporate Stationery Pools.</span
+          >
+        </h1>
+        <p
+          class="max-w-xl mx-auto text-slate-300 text-sm md:text-base mb-10 font-normal leading-relaxed"
+        >
+          Empowering administrative architecture across Zambia with direct
+          manufacturer pipelines, modern distribution systems, and total
+          logistical integrity.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="stock.html"
+            class="px-8 bg-emerald-600 text-white py-4 rounded-xl font-semibold uppercase text-[11px] tracking-wider hover:bg-emerald-700 shadow-md shadow-emerald-600/10 transition-all text-center"
+            >Explore Available Inventory</a
+          >
+          <a
+            href="contact.html"
+            class="px-8 bg-white/10 border border-white/10 text-white py-4 rounded-xl font-semibold uppercase text-[11px] tracking-wider hover:bg-white/15 transition-all text-center backdrop-blur-sm"
+            >Establish Account Connection</a
+          >
+        </div>
+      </div>
     </section>
 
     <!-- Professional About Section -->
-    <section id="about" class="py-24 px-6 bg-white border-y border-slate-200/60">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-7">
-                <span class="text-xs uppercase tracking-[0.3em] text-emerald-600 font-bold block mb-4">Enterprise Profile</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Supplying Zambia's Core Commercial Infrastructure</h2>
-                <p class="text-slate-600 text-base leading-relaxed mb-6">
-                    Comtech Suppliers coordinates robust supply chain networks delivering executive administrative assets, commercial printing hardware setups, and original technical consumables across **Lusaka, Senanga, Mongu, and Kaoma**.
-                </p>
-                <div class="h-[2px] w-16 bg-emerald-600 mb-6"></div>
-                <p class="text-slate-500 text-sm leading-relaxed">
-                    By sourcing directly from certified international manufacturing corridors, we eliminate counterfeit hardware vulnerability while guaranteeing high-speed delivery turnarounds to regional corporate branches.
-                </p>
-            </div>
-            <div class="lg:col-span-5 space-y-4">
-                <div class="p-6 bg-slate-50 border border-slate-200/60 rounded-2xl">
-                    <span class="text-emerald-600 font-bold text-base block mb-1">Authentic OEM Pipeline</span>
-                    <p class="text-slate-500 text-xs leading-relaxed">Every printing unit, toner cartridge, and high-volume media asset is verified for peak mechanical performance.</p>
-                </div>
-                <div class="p-6 bg-slate-50 border border-slate-200/60 rounded-2xl">
-                    <span class="text-emerald-600 font-bold text-base block mb-1">Provincial Reach Matrix</span>
-                    <p class="text-slate-500 text-xs leading-relaxed">Custom local fulfillment parameters allow for secure scheduled delivery drop-offs directly to Western Province operations.</p>
-                </div>
-            </div>
+    <section
+      id="about"
+      class="py-24 px-6 bg-slate-900/40 border-y border-slate-900"
+    >
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+      >
+        <div class="lg:col-span-7">
+          <span
+            class="text-xs uppercase tracking-[0.3em] text-emerald-400 font-bold block mb-4"
+            >Enterprise Profile</span
+          >
+          <h2
+            class="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight"
+          >
+            Supplying Zambia's Core Commercial Infrastructure
+          </h2>
+          <p class="text-slate-300 text-base leading-relaxed mb-6">
+            Comtech Suppliers coordinates robust supply chain networks
+            delivering executive administrative assets, commercial printing
+            hardware setups, and original technical consumables across <br>Lusaka,
+            Senanga, Mongu, and Kaoma<br.
+          </p>
+          <div class="h-[2px] w-16 bg-emerald-500 mb-6"></div>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            By sourcing directly from certified international manufacturing
+            corridors, we eliminate counterfeit hardware vulnerability while
+            guaranteeing high-speed delivery turnarounds to regional corporate
+            branches.
+          </p>
         </div>
+        <div class="lg:col-span-5 space-y-4">
+          <div class="p-6 bg-slate-900 border border-slate-800/60 rounded-2xl">
+            <span class="text-emerald-400 font-bold text-base block mb-1"
+              >Authentic machinery</span
+            >
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Every printing unit, toner cartridge, and high-volume media asset
+              is verified for peak High-Performance.
+            </p>
+          </div>
+          <div class="p-6 bg-slate-900 border border-slate-800/60 rounded-2xl">
+            <span class="text-emerald-400 font-bold text-base block mb-1"
+              >Provincial Reach Matrix</span
+            >
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Custom local fulfillment parameters allow for secure scheduled
+              delivery drop-offs directly to Western Province operations.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Curated 10-Image Asset Gallery -->
-    <section class="py-24 px-6 bg-slate-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="mb-16 text-center md:text-left">
-                <span class="text-xs uppercase tracking-[0.3em] text-emerald-600 font-bold block mb-3">Visual Scope</span>
-                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Core Operational Inventory Gallery</h2>
-                <p class="text-slate-500 text-sm mt-2">A verified look into the hardware frameworks and fine material stocks deployed to our clients.</p>
-            </div>
-
-            <!-- Dynamic 10-Card Image Matrix -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                
-                <!-- Image 1: High-Volume Printing Deck -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image1.jpg" alt="Commercial Multi-function Printer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Hardware Tier 1</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Multifunction Production Systems</h4>
-                </div>
-
-                <!-- Image 2: Elite Corporate Stationery -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image2.jpg" alt="Premium Stationery Materials" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Stationery Core</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Bulk Executive Archive Tools</h4>
-                </div>
-
-                <!-- Image 3: Medium Laser Fleet Options -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image3.jpg" alt="Workgroup Laser Printing Assets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Hardware Tier 2</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Workgroup Laser Matrix</h4>
-                </div>
-
-                <!-- Image 4: Fine Engineering Media -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image4.jpg" alt="Specialized Project Plots" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Specialized Media</span>
-                    <h4 class="font-bold text-slate-900 text-sm">High-Definition Plotting Rolls</h4>
-                </div>
-
-                <!-- Image 5: OEM System Consumables -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image5.jpg" alt="Original Toners Kits" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Consumables</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Genuine High-Yield Ink Kits</h4>
-                </div>
-
-                <!-- Image 6: Processing Electronics -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image6.jpg" alt="Document Shredding Systems" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Technical Tools</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Cross-Cut Heavy Shredders</h4>
-                </div>
-
-                <!-- Image 7: Fine Corporate Letterheads -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image7.jpg" alt="Executive Bond Paper Batch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Stationery Bulk</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Premium Bond Copy Media</h4>
-                </div>
-
-                <!-- Image 8: High Capacity Plotter Units -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image8.jpg" alt="Large Format Engineering Plotters" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Hardware Tier 3</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Large Format Design Engines</h4>
-                </div>
-
-                <!-- Image 9: Desk Architectural Layout Organizers -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image9.jpg" alt="Premium Desk Storage Configs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Stationery Core</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Modular Workspace Filing Units</h4>
-                </div>
-
-                <!-- Image 10: Thermal Binding Systems -->
-                <div class="bg-white rounded-2xl border border-slate-200/60 p-4 hover-premium transition-all duration-300 group">
-                    <div class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-100">
-                        <img src="assets/images/image10.jpg" alt="Desktop Binding Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block mb-1">Technical Tools</span>
-                    <h4 class="font-bold text-slate-900 text-sm">Professional Thermal Finishers</h4>
-                </div>
-
-            </div>
+    <section class="py-24 px-6 bg-slate-950">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-16 text-center md:text-left">
+          <span
+            class="text-xs uppercase tracking-[0.3em] text-emerald-400 font-bold block mb-3"
+            >Visual Scope</span
+          >
+          <h2 class="text-3xl font-extrabold text-white tracking-tight">
+            Core Operational Inventory Gallery
+          </h2>
+          <p class="text-slate-400 text-sm mt-2">
+            A verified look into the hardware frameworks and fine material
+            stocks displayed to our clients.
+          </p>
         </div>
+
+        <!-- Dynamic 10-Card Image Matrix -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <!-- Image 1: High-Volume Printing Deck -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image1.jpg"
+                alt="Commercial Multi-function Printer"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >Canon printer</span
+            >
+            <h4 class="font-bold text-white text-sm">
+              multi-function photo copier
+            </h4>
+          </div>
+
+          <!-- Image 2: Elite Corporate Stationery -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image2.jpg"
+                alt="Premium Stationery Materials"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >photocopier</span
+            >
+            <h4 class="font-bold text-white text-sm">
+              Bulk Executive Archive machine
+            </h4>
+          </div>
+
+          <!-- Image 3: Medium Laser Fleet Options -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image3.jpg"
+                alt="Workgroup Laser Printing Assets"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >Laptops</span
+            >
+            <h4 class="font-bold text-white text-sm">
+              office and student laptops
+            </h4>
+          </div>
+
+          <!-- Image 4: Fine Engineering Media -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image4.jpg"
+                alt="Specialized Project Plots"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >computers</span
+            >
+            <h4 class="font-bold text-white text-sm">
+              full set computer desktops
+            </h4>
+          </div>
+
+          <!-- Image 5: OEM System Consumables -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image5.jpg"
+                alt="Original Toners Kits"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >mouse</span
+            >
+            <h4 class="font-bold text-white text-sm">
+              all kinds of wired mouse
+            </h4>
+          </div>
+
+          <!-- Image 6: Processing Electronics -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image6.jpg"
+                alt="Document Shredding Systems"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >mouse</span
+            >
+            <h4 class="font-bold text-white text-sm">wireless mouse</h4>
+          </div>
+
+          <!-- Image 7: Fine Corporate Letterheads -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image7.jpg"
+                alt="Executive Bond Paper Batch"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >Stationery Bulk</span
+            >
+            <h4 class="font-bold text-white text-sm">hole punchers</h4>
+          </div>
+
+          <!-- Image 8: High Capacity Plotter Units -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image8.jpg"
+                alt="Large Format Engineering Plotters"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >files</span
+            >
+            <h4 class="font-bold text-white text-sm">Large Box Files</h4>
+          </div>
+
+          <!-- Image 9: Desk Architectural Layout Organizers -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image9.jpg"
+                alt="Premium Desk Storage Configs"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >Stationery Core</span
+            >
+            <h4 class="font-bold text-white text-sm">
+              Modular Workspace Filing Units
+            </h4>
+          </div>
+
+          <!-- Image 10: Thermal Binding Systems -->
+          <div
+            class="bg-slate-900/60 rounded-2xl border border-slate-800/60 p-4 hover-premium transition-all duration-300 group"
+          >
+            <div
+              class="h-44 w-full rounded-xl overflow-hidden mb-4 bg-slate-900"
+            >
+              <img
+                src="assets/images/image10.jpg"
+                alt="Desktop Binding Architecture"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-95"
+              />
+            </div>
+            <span
+              class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1"
+              >reams of paper</span
+            >
+            <h4 class="font-bold text-white text-sm">Box of reams of paper</h4>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Global Footer -->
-    <footer class="pt-16 pb-8 px-6 bg-slate-900 text-slate-400 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 border-b border-slate-800 pb-12">
-            <div>
-                <span class="text-white font-black text-lg tracking-tight uppercase block mb-3">COMTECH <span class="text-emerald-500">SUPPLIERS</span></span>
-                <p class="text-xs text-slate-400 max-w-xs font-light">Premium workspace optimization pipelines running throughout Zambia's core financial sectors.</p>
-            </div>
-            <div class="text-xs space-y-1">
-                <h4 class="font-bold text-white uppercase tracking-wider mb-2">Fulfillment Matrix</h4>
-                <p>Main Hub: Great East Road, Lusaka, Zambia.</p>
-                <p>Regional Points: Senanga, Mongu, and Kaoma.</p>
-            </div>
+    <footer
+      class="pt-16 pb-8 px-6 bg-slate-950 text-slate-400 border-t border-slate-900"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 border-b border-slate-900 pb-12"
+      >
+        <div>
+          <span
+            class="text-white font-black text-lg tracking-tight uppercase block mb-3"
+            >COMTECH <span class="text-emerald-400">SUPPLIERS</span></span
+          >
+          <p class="text-xs text-slate-400 max-w-xs font-light">
+            premium stationery solutions for modern workspaces.
+          </p>
         </div>
-        <div class="pt-6 text-center text-[11px] text-slate-500 font-medium">&copy; 2026 Comtech Suppliers. All Rights Reserved.</div>
+        <div class="text-xs space-y-1">
+          <h4 class="font-bold text-white uppercase tracking-wider mb-2">
+            Fulfillment Matrix
+          </h4>
+          <p>Main Hub: Great East Road, Lusaka, Zambia.</p>
+          <p>Regional Points: Senanga, Mongu, and Kaoma.</p>
+        </div>
+        <div class="text-xs space-y-1">
+          <h4 class="font-bold text-white uppercase tracking-wider mb-2">
+            Contact Channels
+          </h4>
+          <p>
+            Email:
+            <a
+              href="mailto:jacksonnsongadevlog@gmail.com"
+              class="text-emerald-400 hover:text-emerald-300"
+              >jacksonnsongadevlog@gmail.com</a
+            >
+          </p>
+          <p>Phone: +260 977722773/ 0966353101/ 0971801172</p>
+        </div>
+      </div>
+      <div class="pt-6 text-center text-[11px] text-slate-600 font-medium">
+        &copy; 2012 Comtech Suppliers. All Rights Reserved.
+      </div>
     </footer>
-
-</body>
+  </body>
 </html>
