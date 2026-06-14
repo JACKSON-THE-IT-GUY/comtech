@@ -3,83 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internal Stock Console | Admin</title>
+    <title>Internal Management Console | Comtech</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Outfit', sans-serif; }</style>
-    
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #020617; color: #F1F5F9; }
+        html, body { scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+        
+        /* Smooth micro-animation profiles for toast notifications */
+        .toast-animate {
+            animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(2rem) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+    </style>
     <script>
-        (function() {
-            const activeToken = sessionStorage.getItem('comtech_session_token');
-            if (activeToken !== 'AUTH_TOKEN_SECURE_VALID_2026') {
-                window.location.replace("index.html");
-            }
-        })();
+        // STRICT GUARDRAIL: Block unauthorized access before DOM rendering begins
+        if (sessionStorage.getItem('comtech_session_token') !== 'AUTH_TOKEN_SECURE_VALID_2026') {
+            window.location.replace("login.html");
+        }
     </script>
 </head>
-<body class="p-8 bg-slate-50">
+<body class="bg-slate-950 p-8 relative min-h-screen pb-32">
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 max-w-md w-full pointer-events-none"></div>
 
     <div class="max-w-6xl mx-auto space-y-8">
-        <div class="flex justify-between items-center bg-slate-900 text-white p-6 rounded-2xl shadow-lg">
+        
+        <div class="flex justify-between items-center bg-slate-900 text-white p-6 rounded-2xl shadow-lg border border-slate-800/60">
             <div>
                 <h1 class="text-xl font-bold tracking-tight">Comtech Inventory Management Console</h1>
                 <p class="text-slate-400 text-xs">Direct update control pipeline to live stock ledger</p>
             </div>
             <div class="flex gap-3">
-                <a href="stock.html" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all flex items-center">
-                    View Live Catalog ↗
+                <button onclick="DashboardController.exportToCSV()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all flex items-center gap-1">
+                    Export to CSV
+                </button>
+                <a href="stock.html" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all flex items-center border border-slate-700/50">
+                    View Live Catalog
                 </a>
-                <button onclick="handleLogout()" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all">
+                <button onclick="DashboardController.executeLogout()" class="bg-red-600/90 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all shadow-md shadow-red-950/20">
                     Secure Log Out
                 </button>
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2 mb-4">Provision New Core Asset</h3>
-            <form id="add-stock-form" onsubmit="handleFormSubmit(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="bg-slate-900/30 border border-slate-900 p-5 rounded-2xl">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Unique Core SKUs</span>
+                <span id="metric-skus" class="text-2xl font-extrabold text-white tracking-tight">0</span>
+            </div>
+            
+            <div id="metric-low-card" class="bg-slate-900/30 border border-slate-900 p-5 rounded-2xl transition-all flex justify-between items-center">
+                <div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Low Stock Entities</span>
+                    <span id="metric-low" class="text-2xl font-extrabold text-white tracking-tight">0</span>
+                </div>
+                <button id="restock-btn" onclick="DashboardController.generateRestockEmail()" class="hidden bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-3 py-2 rounded-lg transition-all">
+                    Dispatch Request
+                </button>
+            </div>
+
+            <div class="bg-slate-900/30 border border-slate-900 p-5 rounded-2xl">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Vault Pieces</span>
+                <span id="metric-total-items" class="text-2xl font-extrabold text-emerald-400 tracking-tight">0</span>
+            </div>
+        </div>
+
+        <div class="bg-slate-900/40 p-6 rounded-2xl border border-slate-900 shadow-sm">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-400 border-b border-slate-800 pb-2 mb-4">Provision New Core Asset</h3>
+            <form id="add-stock-form" onsubmit="DashboardController.handleInventorySubmit(event)" class="grid grid-cols-1 md:grid-cols-12 gap-4">
                 <div class="md:col-span-4">
                     <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Asset Name</label>
-                    <input type="text" id="form-name" required placeholder="e.g., Enterprise Multi-function Printer" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                    <input type="text" id="form-name" required placeholder="e.g., Multi-function Printer" class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 outline-none transition-all">
                 </div>
                 <div class="md:col-span-3">
                     <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Catalog SKU</label>
-                    <input type="text" id="form-sku" required placeholder="e.g., SKU-PR-MFP90" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-mono outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                    <input type="text" id="form-sku" required placeholder="e.g., SKU-PR-90" class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs font-mono text-white placeholder-slate-600 outline-none transition-all">
                 </div>
                 <div class="md:col-span-3">
                     <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Quantity Available</label>
-                    <input type="text" id="form-volume" required placeholder="e.g., 14 Units" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                    <input type="text" id="form-volume" required placeholder="e.g., 14 Units" class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 outline-none transition-all">
                 </div>
                 <div class="md:col-span-2">
                     <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Stock Status</label>
-                    <select id="form-status" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
-                        <option value="In Stock &bull; Ready">In Stock</option>
-                        <option value="Low Stock &bull; Secure">Low Stock</option>
-                        <option value="Out of Stock">Out of Stock</option>
+                    <select id="form-status" class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-3 py-2.5 text-xs text-slate-300 outline-none cursor-pointer transition-all appearance-none">
+                        <option value="In Stock" class="bg-slate-950 text-white">In Stock</option>
+                        <option value="Low Stock" class="bg-slate-950 text-white">Low Stock</option>
+                        <option value="Out of Stock" class="bg-slate-950 text-white">Out of Stock</option>
                     </select>
                 </div>
                 <div class="md:col-span-7">
                     <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Description Details</label>
-                    <input type="text" id="form-desc" required placeholder="Provide brief specification details..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs outline-none focus:border-emerald-500 focus:bg-white transition-all">
+                    <input type="text" id="form-desc" required placeholder="Provide brief specification details..." class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 outline-none transition-all">
                 </div>
                 <div class="md:col-span-3">
                     <label class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Product Image</label>
-                    <input type="file" id="form-image" accept="image/*" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs outline-none file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-200 file:text-slate-700 hover:file:bg-slate-300">
+                    <input type="file" id="form-image" accept="image/*" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-400 outline-none file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-800 file:text-slate-300 hover:file:bg-slate-700 cursor-pointer">
                 </div>
                 <div class="md:col-span-2 flex items-end">
-                    <button type="submit" class="w-full bg-slate-900 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-md">
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-md shadow-emerald-950/40">
                         Commit Asset
                     </button>
                 </div>
             </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 pb-2 mb-4">Active Stock Ledger Control</h3>
-            <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+        <div class="bg-slate-900/40 p-6 rounded-2xl border border-slate-900 shadow-sm space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-3">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Active Stock Ledger Control</h3>
+                
+                <div class="w-full sm:w-64">
+                    <input type="text" id="ledger-search" oninput="DashboardController.handleFilter(this.value)" placeholder="Filter ledger by name/SKU..." class="w-full bg-slate-950 border border-slate-800 focus:border-emerald-500 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-600 outline-none transition-all">
+                </div>
+            </div>
+
+            <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
                 <table class="w-full text-left border-collapse text-xs">
                     <thead>
-                        <tr class="bg-slate-100 border-b border-slate-200 text-slate-600 font-bold">
+                        <tr class="bg-slate-900/80 border-b border-slate-800 text-slate-400 font-bold">
                             <th class="p-4">Thumbnail</th>
                             <th class="p-4">SKU / Identifier</th>
                             <th class="p-4">Core Item Identity</th>
@@ -87,88 +132,269 @@
                             <th class="p-4 text-right">Operational Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-table-body" class="divide-y divide-slate-200 bg-white"></tbody>
+                    <tbody id="admin-table-body" class="divide-y divide-slate-900/60 bg-slate-950/40"></tbody>
                 </table>
             </div>
         </div>
+
+        <div class="bg-slate-950 border border-slate-900 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest block">Core Engine Debug Operations</span>
+                <p class="text-slate-500 text-[11px]">System administrative testing utilities framework.</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="DashboardController.seedDatabase()" class="bg-blue-950/40 text-blue-400 hover:bg-blue-900/20 border border-blue-900/30 text-[10px] font-bold uppercase tracking-wider px-3 py-2 rounded-lg transition-all">
+                    Seed Live Database
+                </button>
+                <button onclick="DashboardController.nukeDatabase()" class="bg-red-950/40 text-red-400 hover:bg-red-900/20 border border-red-900/30 text-[10px] font-bold uppercase tracking-wider px-3 py-2 rounded-lg transition-all">
+                    Nuke Ledger Memory
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        function getStockManifest() {
-            const currentData = localStorage.getItem('comtech_inventory_manifest');
-            return currentData ? JSON.parse(currentData) : [];
-        }
+        const DashboardController = {
+            state: {
+                currentSearchFilter: ''
+            },
 
-        function saveStockManifest(updatedArray) {
-            localStorage.setItem('comtech_inventory_manifest', JSON.stringify(updatedArray));
-            renderAdminTable();
-        }
+            init() {
+                this.renderLedgerTable();
+            },
 
-        function renderAdminTable() {
-            const manifest = getStockManifest();
-            const adminTable = document.getElementById('admin-table-body');
-            if (!adminTable) return;
-            adminTable.innerHTML = '';
+            executeLogout() {
+                sessionStorage.removeItem('comtech_session_token');
+                window.location.replace("login.html");
+            },
 
-            manifest.forEach(item => {
-                const imgTag = item.image ? `<img src="${item.image}" class="h-10 w-10 object-cover rounded-lg border border-slate-200">` : `<div class="h-10 w-10 bg-slate-200 rounded-lg flex items-center justify-center text-[10px] text-slate-400">No Img</div>`;
+            getManifest() {
+                const manifest = localStorage.getItem('comtech_inventory_manifest');
+                return manifest ? JSON.parse(manifest) : [];
+            },
+
+            saveManifest(array) {
+                localStorage.setItem('comtech_inventory_manifest', JSON.stringify(array));
+                this.renderLedgerTable();
+            },
+
+            handleFilter(val) {
+                this.state.currentSearchFilter = val.toLowerCase().trim();
+                this.renderLedgerTable();
+            },
+
+            // ANIMATED FLASH TOAST NOTIFICATION UTILITY
+            showToast(msg, type = 'success') {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
                 
-                adminTable.innerHTML += `
-                    <tr class="hover:bg-slate-50/80 transition-colors">
-                        <td class="p-4">${imgTag}</td>
-                        <td class="p-4 font-mono font-bold text-slate-400">${item.sku}</td>
-                        <td class="p-4 font-semibold text-slate-900">${item.name}</td>
-                        <td class="p-4 text-slate-600 font-medium">${item.volume}</td>
-                        <td class="p-4 text-right">
-                            <button onclick="purgeAsset(${item.id})" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wide">
-                                Purge Asset
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const manifest = getStockManifest();
-            const imageFile = document.getElementById('form-image').files[0];
-
-            if (imageFile) {
-                const reader = new FileReader();
-                // Convert chosen file to Base64 Text String
-                reader.onloadend = function() {
-                    const newItem = {
-                        id: Date.now(), 
-                        name: document.getElementById('form-name').value,
-                        sku: document.getElementById('form-sku').value,
-                        volume: document.getElementById('form-volume').value,
-                        status: document.getElementById('form-status').value,
-                        desc: document.getElementById('form-desc').value,
-                        image: reader.result // Base64 string data saved here
-                    };
-                    manifest.push(newItem);
-                    saveStockManifest(manifest);
-                    document.getElementById('add-stock-form').reset();
+                toast.className = `toast-animate pointer-events-auto flex items-center gap-3 px-4 py-3.5 rounded-xl border text-xs font-semibold uppercase tracking-wider shadow-xl transition-all duration-300`;
+                
+                if (type === 'success') {
+                    toast.className += ' bg-slate-900 border-emerald-500/30 text-emerald-400';
+                } else if (type === 'danger') {
+                    toast.className += ' bg-slate-900 border-rose-500/30 text-rose-400';
+                } else {
+                    toast.className += ' bg-slate-900 border-blue-500/30 text-blue-400';
                 }
-                reader.readAsDataURL(imageFile);
+                
+                toast.innerHTML = `<span>${msg}</span>`;
+                container.appendChild(toast);
+
+                // Auto-destroy lifecycle hook
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(-1rem)';
+                    setTimeout(() => toast.remove(), 300);
+                }, 4000);
+            },
+
+            // METRICS CALCULATOR WITH RE-STOCK LOGIC
+            calculateMetrics(data) {
+                document.getElementById('metric-skus').textContent = data.length;
+                
+                const lowStockCount = data.filter(item => item.status && item.status.includes('Low Stock')).length;
+                const lowCard = document.getElementById('metric-low-card');
+                const restockBtn = document.getElementById('restock-btn');
+                
+                document.getElementById('metric-low').textContent = lowStockCount;
+
+                if (lowStockCount > 0) {
+                    lowCard.classList.remove('border-slate-900');
+                    lowCard.classList.add('border-amber-500/30', 'bg-amber-950/10');
+                    restockBtn.classList.remove('hidden');
+                } else {
+                    lowCard.classList.remove('border-amber-500/30', 'bg-amber-950/10');
+                    lowCard.classList.add('border-slate-900');
+                    restockBtn.classList.add('hidden');
+                }
+
+                let grandTotal = 0;
+                data.forEach(item => {
+                    const parsed = parseInt(item.volume.replace(/[^0-9]/g, ''), 10);
+                    if (!isNaN(parsed)) grandTotal += parsed;
+                });
+                document.getElementById('metric-total-items').textContent = grandTotal.toLocaleString();
+            },
+
+            // LOW STOCK PROCUREMENT EMAIL DISPATCH GENERATOR
+            generateRestockEmail() {
+                const data = this.getManifest();
+                const lowItems = data.filter(item => item.status && item.status.includes('Low Stock'));
+                
+                if(lowItems.length === 0) return;
+
+                const recipient = "jacksonnsongadevlog@gmail.com";
+                const subject = encodeURIComponent("URGENT: Comtech Workspace Supply Chain Restock Request");
+                
+                let bodyContent = `Attention Procurement Team,\n\nOur system metrics engine has identified critical storage alerts across our logistics layout.\n\nPlease process immediate requisition protocols for the following components:\n\n`;
+                
+                lowItems.forEach((item, i) => {
+                    bodyContent += `${i + 1}. [${item.sku}] - ${item.name} (Current Level: ${item.volume})\n`;
+                });
+
+                bodyContent += `\nGenerated via Secure Management Console Platform System Core.\nTimestamp: ${new Date().toISOString()}`;
+                
+                window.location.href = `mailto:${recipient}?subject=${subject}&body=${encodeURIComponent(bodyContent)}`;
+                this.showToast("Restock Email Manifest Compiled", "info");
+            },
+
+            // CSV MATRIX SPREADSHEET COMPILER
+            exportToCSV() {
+                const data = this.getManifest();
+                if (data.length === 0) {
+                    this.showToast("Cannot export empty manifest matrix", "danger");
+                    return;
+                }
+
+                let csvRows = ['ID,SKU,Asset Name,Volume,Status,Description'];
+                data.forEach(item => {
+                    const cleanDesc = item.desc.replace(/"/g, '""');
+                    csvRows.push(`"${item.id}","${item.sku}","${item.name}","${item.volume}","${item.status}","${cleanDesc}"`);
+                });
+
+                const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.setAttribute("download", `comtech_inventory_${Date.now()}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                this.showToast("CSV Database Export Completed");
+            },
+
+            renderLedgerTable() {
+                const data = this.getManifest();
+                this.calculateMetrics(data);
+
+                const container = document.getElementById('admin-table-body');
+                if (!container) return;
+                container.innerHTML = '';
+
+                const filteredData = data.filter(item => {
+                    return item.name.toLowerCase().includes(this.state.currentSearchFilter) || 
+                           item.sku.toLowerCase().includes(this.state.currentSearchFilter);
+                });
+
+                filteredData.forEach(item => {
+                    const thumbnail = item.image ? 
+                        `<img src="${item.image}" class="h-10 w-10 object-cover rounded-lg border border-slate-800">` : 
+                        `<div class="h-10 w-10 bg-slate-900 rounded-lg flex items-center justify-center text-[10px] text-slate-500 border border-slate-800">No Img</div>`;
+                    
+                    const isLow = item.status && item.status.includes('Low Stock');
+                    const textVolClass = isLow ? 'text-amber-400' : 'text-emerald-400';
+
+                    container.innerHTML += `
+                        <tr class="hover:bg-slate-900/30 transition-colors">
+                            <td class="p-4">${thumbnail}</td>
+                            <td class="p-4 font-mono font-bold text-slate-500">${item.sku}</td>
+                            <td class="p-4 font-semibold text-white">${item.name}</td>
+                            <td class="p-4 ${textVolClass} font-medium">${item.volume}</td>
+                            <td class="p-4 text-right">
+                                <button onclick="DashboardController.purgeAsset(${item.id}, '${item.sku}')" class="bg-red-950/40 hover:bg-red-900/30 text-red-400 border border-red-900/30 font-bold px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wide transition-colors">
+                                    Purge Asset
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            },
+
+            // AUTOMATIC HTML5 CANVAS BASE64 IMAGE COMPRESSION ENGINE
+            handleInventorySubmit(e) {
+                e.preventDefault();
+                const currentManifest = this.getManifest();
+                const selectedFile = document.getElementById('form-image').files[0];
+
+                if (selectedFile) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 400;
+                            const scaleSize = MAX_WIDTH / img.width;
+                            canvas.width = MAX_WIDTH;
+                            canvas.height = img.height * scaleSize;
+
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+                            const newAsset = {
+                                id: Date.now(),
+                                name: document.getElementById('form-name').value,
+                                sku: document.getElementById('form-sku').value,
+                                volume: document.getElementById('form-volume').value,
+                                status: document.getElementById('form-status').value,
+                                desc: document.getElementById('form-desc').value,
+                                image: compressedBase64
+                            };
+                            
+                            currentManifest.push(newAsset);
+                            this.saveManifest(currentManifest);
+                            document.getElementById('add-stock-form').reset();
+                            this.showToast(`Asset ${newAsset.sku} Committed to Registry`);
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(selectedFile);
+                }
+            },
+
+            purgeAsset(uid, skuString) {
+                if(confirm(`Confirm asset removal for sequence registration node [${skuString}]?`)) {
+                    const current = this.getManifest();
+                    const altered = current.filter(asset => asset.id !== uid);
+                    this.saveManifest(altered);
+                    this.showToast(`Asset ${skuString} purged from system memory`, "danger");
+                }
+            },
+
+            // DEMO DATA SEED ENGINE
+            seedDatabase() {
+                const mockBatch = [
+                    { id: 101, name: "Canon imageRUNNER Advance", sku: "SKU-CN-IRA45", volume: "12 Units", status: "In Stock", desc: "Heavy corporate color A3 multi-function printing mainframe engine.", image: "" },
+                    { id: 102, name: "HP LaserJet Enterprise Toner", sku: "SKU-HP-CF289X", volume: "2 Units Remaining", status: "Low Stock", desc: "High yield original black cartridge modules built for continuous output arrays.", image: "" },
+                    { id: 103, name: "Conqueror Executive Bond Paper", sku: "SKU-CQ-BND90", volume: "45 Reams", status: "In Stock", desc: "Watermarked premium bright white executive writing layouts for institutional signatures.", image: "" }
+                ];
+                this.saveManifest(mockBatch);
+                this.showToast("Database seeded with mock logs", "info");
+            },
+
+            // SYSTEM DATA NUKE CONSOLE RESET
+            nukeDatabase() {
+                if(confirm("CRITICAL OVERRIDE WARNING:\nThis completely zeroes out your active synchronized database arrays. Public catalogs will return to defaults. Proceed?")) {
+                    localStorage.removeItem('comtech_inventory_manifest');
+                    this.saveManifest([]);
+                    this.showToast("Ledger data permanently zeroed out", "danger");
+                }
             }
-        }
+        };
 
-        function purgeAsset(id) {
-            if(confirm("Confirm asset removal?")) {
-                const manifest = getStockManifest();
-                const filteredManifest = manifest.filter(p => p.id !== id);
-                saveStockManifest(filteredManifest);
-            }
-        }
-
-        function handleLogout() {
-            sessionStorage.removeItem('comtech_session_token');
-            window.location.replace("index.html");
-        }
-
-        document.addEventListener('DOMContentLoaded', renderAdminTable);
+        document.addEventListener('DOMContentLoaded', () => DashboardController.init());
     </script>
 </body>
 </html>

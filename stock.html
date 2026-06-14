@@ -1,88 +1,293 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Inventory | Comtech Suppliers</title>
+    <title>Inventory Matrix | Comtech Suppliers</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Outfit', sans-serif; background-color: #F8FAFC; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Outfit', sans-serif; background-color: #020617; color: #F1F5F9; }
+        html, body { scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+        @media (min-width: 1024px) {
+            .hover-premium:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+                border-color: rgba(16, 185, 129, 0.3);
+            }
+        }
+    </style>
 </head>
-<body class="pt-24">
+<body class="selection:bg-emerald-600 selection:text-white bg-slate-950">
 
-    <nav class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
             <a href="index.html" class="flex items-center gap-3 group">
-                <img src="assets/images/logo1.png" alt="Comtech Logo" class="h-14 w-auto rounded-none transition-transform group-hover:scale-105">
+                <img src="assets/images/logo1.png" alt="Comtech Logo" class="h-14 w-auto rounded-none transition-transform group-hover:scale-105 filter brightness-110">
                 <div class="hidden md:flex flex-col justify-center">
-                    <span class="text-slate-900 font-extrabold text-lg uppercase tracking-tight">Comtech <span class="text-emerald-600">Suppliers</span></span>
-                    <span class="text-[9px] tracking-[0.3em] text-slate-400 uppercase font-semibold">Workspace Infrastructure</span>
+                    <span class="text-white font-extrabold text-lg uppercase tracking-tight">Comtech <span class="text-emerald-400">Suppliers</span></span>
+                    <span class="text-[9px] tracking-[0.3em] text-slate-500 uppercase font-semibold">Workspace Infrastructure</span>
                 </div>
             </a>
-            <div class="flex items-center space-x-8 text-xs uppercase tracking-widest font-semibold">
-                <a href="index.html" class="text-slate-600 hover:text-emerald-600 transition-colors">Home Hub</a>
-                <a href="stock.html" class="text-emerald-600">What's In Stock</a>
-                <a href="contact.html" class="text-slate-600 hover:text-emerald-600 transition-colors">Contact</a>
+            
+            <div class="flex items-center space-x-6 md:space-x-8">
+                <a href="index.html" class="text-xs uppercase tracking-widest font-semibold text-slate-400 hover:text-emerald-400 transition-colors">Home</a>
+                <a href="stock.html" class="text-xs uppercase tracking-widest font-bold text-emerald-400">Stock</a>
+                <a href="contact.html" class="text-xs uppercase tracking-widest font-semibold text-slate-400 hover:text-emerald-400 transition-colors">Contact</a>
+                
+                <span class="h-4 w-px bg-slate-800 hidden sm:block"></span>
+                
+                <a href="login.html" class="text-[11px] uppercase tracking-widest font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                    Portal
+                </a>
             </div>
+            
+            <a href="contact.html" class="hidden sm:inline-flex bg-white text-slate-950 hover:bg-emerald-500 hover:text-slate-950 px-5 py-2.5 rounded-full font-bold transition-all text-xs uppercase tracking-wider shadow-sm">Request RFP</a>
         </div>
     </nav>
 
-    <section class="py-16 px-6 max-w-7xl mx-auto">
-        <div class="mb-12 border-b border-slate-200 pb-6">
-            <span class="text-xs uppercase tracking-[0.25em] text-emerald-600 font-bold block mb-2">Live Corporate Inventory</span>
-            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Current Warehouse Stock Levels</h1>
+    <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto space-y-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-emerald-400 font-bold block mb-3">Live Log</span>
+                <h1 class="text-3xl font-extrabold text-white tracking-tight">Verified Corporate Stock</h1>
+                <p class="text-slate-400 text-sm mt-1">Real-time availability of enterprise printing systems and raw materials.</p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto items-center">
+                <div class="w-full md:w-80">
+                    <input type="text" id="catalog-search" oninput="CatalogController.handleSearch(this.value)" placeholder="Search infrastructure catalog..." class="w-full bg-slate-900 border border-slate-800 focus:border-emerald-500 rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 outline-none transition-colors">
+                </div>
+                <div class="w-full sm:w-48">
+                    <select id="catalog-status-filter" onchange="CatalogController.handleStatusFilter(this.value)" class="w-full bg-slate-900 border border-slate-800 focus:border-emerald-500 rounded-xl px-3 py-3 text-xs text-slate-300 outline-none cursor-pointer transition-colors appearance-none">
+                        <option value="ALL">All Availability States</option>
+                        <option value="In Stock">In Stock Only</option>
+                        <option value="Low Stock">Low Stock Alerts</option>
+                        <option value="Out of Stock">Out of Stock Only</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div id="inventory-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    </section>
+
+        <div id="catalog-grid-display" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        
+        <div id="catalog-empty-view" class="hidden text-center py-20 border border-dashed border-slate-900 rounded-2xl bg-slate-900/10">
+            <p class="text-slate-500 text-sm font-medium">No system assets match the specified registry criteria.</p>
+        </div>
+    </main>
+
+    <footer class="pt-16 pb-8 px-6 bg-slate-950 text-slate-400 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8 border-b border-slate-900 pb-12">
+            <div>
+                <span class="text-white font-black text-lg tracking-tight uppercase block mb-3">COMTECH <span class="text-emerald-400">SUPPLIERS</span></span>
+                <p class="text-xs text-slate-400 max-w-xs font-light">premium stationery solutions for modern workspaces.</p>
+            </div>
+            <div class="text-xs space-y-1">
+                <h4 class="font-bold text-white uppercase tracking-wider mb-2">Fulfillment Matrix</h4>
+                <p>Main Hub: Great East Road, Lusaka, Zambia.</p>
+                <p>Regional Points: Senanga, Mongu, and Kaoma.</p>
+            </div>
+            <div class="text-xs space-y-1">
+                <h4 class="font-bold text-white uppercase tracking-wider mb-2">Contact Channels</h4>
+                <p>Email: <a href="mailto:jacksonnsongadevlog@gmail.com" class="text-emerald-400 hover:text-emerald-300">jacksonnsongadevlog@gmail.com</a></p>
+                <p>Phone: +260 977722773/ 0966353101/ 0971801172</p>
+            </div>
+        </div>
+        <div class="pt-6 text-center text-[11px] text-slate-600 font-medium">&copy; 2012 Comtech Suppliers. All Rights Reserved.</div>
+    </footer>
+
+    <div id="spec-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative p-6 space-y-5">
+            <button onclick="CatalogController.closeModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors text-xs uppercase tracking-wider font-bold">
+                Close
+            </button>
+            <div id="modal-image-wrapper" class="w-full h-48 bg-slate-950 rounded-xl overflow-hidden border border-slate-800 hidden">
+                <img id="modal-img" src="" alt="Asset Overview" class="w-full h-full object-cover">
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                    <span id="modal-sku" class="font-mono text-[10px] font-bold text-slate-500 tracking-wider"></span>
+                    <span id="modal-badge" class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md"></span>
+                </div>
+                <h2 id="modal-name" class="text-lg font-bold text-white tracking-tight"></h2>
+            </div>
+            <div class="border-t border-slate-800/60 pt-4 space-y-3">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-0.5">Allocation Ledger Volume</span>
+                    <p id="modal-volume" class="text-xs text-slate-300 font-medium"></p>
+                </div>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider block mb-0.5">Technical Architectural Summary</span>
+                    <p id="modal-desc" class="text-xs text-slate-400 leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function getStockManifest() {
-            const currentData = localStorage.getItem('comtech_inventory_manifest');
-            return currentData ? JSON.parse(currentData) : [];
-        }
+        const CatalogController = {
+            state: {
+                searchQuery: '',
+                statusFilter: 'ALL'
+            },
 
-        function renderStockInterface() {
-            const manifest = getStockManifest();
-            const publicGrid = document.getElementById('inventory-grid');
-            if (!publicGrid) return;
-            publicGrid.innerHTML = '';
-
-            if (manifest.length === 0) {
-                publicGrid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm font-medium">No items currently dispatched in live system ledger.</div>`;
-                return;
-            }
-
-            manifest.forEach(item => {
-                const isLowStock = item.status.includes('Low') || item.status.includes('Out');
-                const badgeColorClass = isLowStock ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700';
+            init() {
+                this.renderCatalog();
                 
-                // Fixed Fallback string literal syntax to safely clear raw code leakage
-                const fallbackImg = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23CBD5E1" stroke-width="1"><rect width="24" height="24" fill="%23F1F5F9"/><path d="M5 21h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
-                const cardImage = (item.image && item.image.trim() !== "") ? item.image : fallbackImg;
+                // Active synchronization window storage engine listener
+                window.addEventListener('storage', (e) => {
+                    if (e.key === 'comtech_inventory_manifest') {
+                        this.renderCatalog();
+                    }
+                });
+            },
 
-                publicGrid.innerHTML += `
-                    <div class="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm flex flex-col justify-between">
-                        <div>
-                            <div class="w-full bg-slate-50 border-b border-slate-100 relative flex items-center justify-center p-4 min-h-[260px] max-h-[320px]">
-                                <img src="${cardImage}" alt="${item.name}" class="max-w-full max-h-[280px] w-auto h-auto object-contain rounded-xl shadow-sm transition-transform duration-500 hover:scale-[1.03]">
-                                <span class="absolute top-4 left-4 text-[10px] ${badgeColorClass} font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">${item.status}</span>
+            getManifest() {
+                const manifest = localStorage.getItem('comtech_inventory_manifest');
+                return manifest ? JSON.parse(manifest) : [];
+            },
+
+            handleSearch(val) {
+                this.state.searchQuery = val.toLowerCase().trim();
+                this.renderCatalog();
+            },
+
+            handleStatusFilter(val) {
+                this.state.statusFilter = val;
+                this.renderCatalog();
+            },
+
+            renderCatalog() {
+                const grid = document.getElementById('catalog-grid-display');
+                const emptyView = document.getElementById('catalog-empty-view');
+                if (!grid) return;
+
+                let data = this.getManifest();
+                
+                // Seamless operational fallback data maps if dashboard ledger states are clear
+                if (data.length === 0) {
+                    data = [
+                        { id: 1, name: "Multi-Function Printers", sku: "SYS-PR-01", volume: "In Stock", status: "In Stock", desc: "High-volume corporate copy decks, laser engines, and specialized wide-format workgroup setups.", image: "assets/images/image1.jpg" },
+                        { id: 2, name: "Mouse", sku: "SYS-MS-02", volume: "In Stock", status: "In Stock", desc: "Certified manufacturer toner kits, ink drums, and performance refinement parts for all systems.", image: "assets/images/image5.jpg" },
+                        { id: 3, name: "Reams of Papers", sku: "SYS-ST-03", volume: "8 Units Remaining", status: "Low Stock", desc: "Premium reams of office papers, archival files, executive desk arrays, and binding configurations.", image: "assets/images/image10.jpg" }
+                    ];
+                }
+
+                // Process target queries across multi-tier criteria matrices
+                const filtered = data.filter(item => {
+                    const matchesSearch = item.name.toLowerCase().includes(this.state.searchQuery) || 
+                                          item.sku.toLowerCase().includes(this.state.searchQuery) ||
+                                          item.desc.toLowerCase().includes(this.state.searchQuery);
+                    
+                    const matchesStatus = this.state.statusFilter === 'ALL' || 
+                                          (item.status && item.status.includes(this.state.statusFilter));
+                    
+                    return matchesSearch && matchesStatus;
+                });
+
+                grid.innerHTML = '';
+                
+                if (filtered.length === 0) {
+                    emptyView.classList.remove('hidden');
+                    return;
+                }
+                emptyView.classList.add('hidden');
+
+                filtered.forEach(item => {
+                    const fallbackImg = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230f172a"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="10" fill="%23334155">No Image Available</text></svg>';
+                    const imgSource = item.image ? item.image : fallbackImg;
+                    
+                    const isLow = item.status && item.status.includes('Low Stock');
+                    const isOut = item.status && item.status.includes('Out of Stock');
+                    
+                    let badgeClass = 'bg-emerald-950/50 border-emerald-800 text-emerald-400';
+                    if (isLow) badgeClass = 'bg-amber-950/50 border-amber-800 text-amber-400';
+                    if (isOut) badgeClass = 'bg-rose-950/50 border-rose-800 text-rose-400';
+
+                    const cleanStatus = item.status ? item.status.replace(/&bull;/g, '-').replace(/•/g, '-') : 'In Stock';
+
+                    grid.innerHTML += `
+                        <div onclick="CatalogController.openModal(${item.id})" class="bg-slate-900/50 border border-slate-900 rounded-2xl p-5 hover-premium transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                            <div>
+                                <div class="h-48 bg-slate-950 rounded-xl mb-4 overflow-hidden border border-slate-900/40 relative">
+                                    <img src="${imgSource}" alt="${item.name}" class="w-full h-full object-cover opacity-90 transition-transform duration-500 hover:scale-105">
+                                </div>
+                                <div class="flex items-center justify-between gap-3 mb-1">
+                                    <h3 class="text-base font-bold text-white truncate max-w-[70%]">${item.name}</h3>
+                                    <span class="px-2.5 py-1 border text-[10px] uppercase font-bold rounded-full tracking-wider ${badgeClass}">${cleanStatus}</span>
+                                </div>
+                                <p class="text-slate-500 font-mono text-[9px] mb-3 tracking-wider uppercase">${item.sku}</p>
+                                <p class="text-slate-400 text-xs leading-relaxed line-clamp-3">${item.desc}</p>
                             </div>
-                            
-                            <div class="p-6">
-                                <span class="text-[10px] text-slate-400 font-mono tracking-wider block mb-1">${item.sku}</span>
-                                <h3 class="text-base font-bold text-slate-900 mb-2">${item.name}</h3>
-                                <p class="text-xs text-slate-500 leading-relaxed">${item.desc}</p>
+                            <div class="mt-5 pt-3 border-t border-slate-900/80 flex justify-between items-center text-[11px]">
+                                <span class="text-slate-500 uppercase font-bold tracking-wider">Availability</span>
+                                <span class="font-semibold text-white tracking-wide">${item.volume}</span>
                             </div>
                         </div>
-                        <div class="mx-6 pb-6 pt-4 border-t border-slate-100 text-xs flex justify-between font-medium text-slate-600">
-                            <span>Available Vol: <strong class="text-slate-900">${item.volume}</strong></span>
-                            <a href="contact.html" class="text-emerald-600 hover:underline font-bold">Lock Batch &rarr;</a>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-        document.addEventListener('DOMContentLoaded', renderStockInterface);
+                    `;
+                });
+            },
+
+            openModal(id) {
+                let data = this.getManifest();
+                
+                if (data.length === 0) {
+                    data = [
+                        { id: 1, name: "Multi-Function Printers", sku: "SYS-PR-01", volume: "In Stock", status: "In Stock", desc: "High-volume corporate copy decks, laser engines, and specialized wide-format workgroup setups.", image: "assets/images/image1.jpg" },
+                        { id: 2, name: "Mouse", sku: "SYS-MS-02", volume: "In Stock", status: "In Stock", desc: "Certified manufacturer toner kits, ink drums, and performance refinement parts for all systems.", image: "assets/images/image5.jpg" },
+                        { id: 3, name: "Reams of Papers", sku: "SYS-ST-03", volume: "8 Units Remaining", status: "Low Stock", desc: "Premium reams of office papers, archival files, executive desk arrays, and binding configurations.", image: "assets/images/image10.jpg" }
+                    ];
+                }
+
+                const asset = data.find(item => item.id === id);
+                if (!asset) return;
+
+                const modal = document.getElementById('spec-modal');
+                const imgWrapper = document.getElementById('modal-image-wrapper');
+                const img = document.getElementById('modal-img');
+                
+                document.getElementById('modal-sku').textContent = asset.sku;
+                document.getElementById('modal-name').textContent = asset.name;
+                document.getElementById('modal-volume').textContent = asset.volume;
+                document.getElementById('modal-desc').textContent = asset.desc;
+
+                const badge = document.getElementById('modal-badge');
+                const cleanStatus = asset.status ? asset.status.replace(/&bull;/g, '-').replace(/•/g, '-') : 'In Stock';
+                badge.textContent = cleanStatus;
+                
+                const isLow = asset.status && asset.status.includes('Low Stock');
+                const isOut = asset.status && asset.status.includes('Out of Stock');
+                badge.className = isLow ? 'bg-amber-950 text-amber-400 border border-amber-900/30 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md' : 
+                                  isOut ? 'bg-rose-950 text-rose-400 border border-rose-900/30 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md' : 
+                                          'bg-emerald-950 text-emerald-400 border border-emerald-900/30 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md';
+
+                if (asset.image) {
+                    img.src = asset.image;
+                    imgWrapper.classList.remove('hidden');
+                } else {
+                    imgWrapper.classList.add('hidden');
+                }
+
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                }, 10);
+            },
+
+            closeModal() {
+                const modal = document.getElementById('spec-modal');
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => CatalogController.init());
     </script>
 </body>
 </html>
